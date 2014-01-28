@@ -86,7 +86,8 @@ A Good example is the example using Python:
 Read the documentation. If you want to do something, see whether there is an API call for it.
 
 #### Beyond here
-The most important document: [<h1>User Manual for NAO</h1>](https://community.aldebaran-robotics.com/doc/1-14/naoqi/index.html#naoqi-api)
+The most important document: <h2>[User Manual for NAO](https://community.aldebaran-robotics.com/doc/1-14/naoqi/index.html#naoqi-api)</h2>
+
 Here is a list of other 'stuff' to know:
 
 * [List of Joints and the limitation of each joint](https://community.aldebaran-robotics.com/doc/1-14/family/nao_h25/joints_h25.html#h25-joints)
