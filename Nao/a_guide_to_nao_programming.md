@@ -1,5 +1,5 @@
 ##A Guide to NAO Programming
-Author: xtan@cs.wisc.edu | Version: 0.0.1
+Author: xtan@cs.wisc.edu | Version: 0.0.2
 
 
 ###What is this about?
@@ -19,7 +19,7 @@ A basic program that uses the voice synthesizer on Nao to speak "Hello World"
 * using [C#](https://community.aldebaran-robotics.com/doc/1-14/dev/dotnet/index.html#hello-world-example)
 
 
-####3.: Moving NAO
+####3. Moving NAO
 This is an example of controlling NAO to move forward using the ``Motion`` Module.
 
 Example: [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/making_nao_move.html)
@@ -28,12 +28,12 @@ Example: [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/m
 remember to set the stiffness ``motion.setStiffnesses("Body", 1.0)`` before moving. In simple terms, stiffness is whether there is electric current flowing through the motors in NAO's body. To learn more about [Stiffness](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-stiffness.html#control-stiffness)
 
 #####Declaring Variables
-In the documentation, parameters for methods are often ``const AL::ALValue&``, but python and C# does not have this type. In __Python__ ALValues are often just simple list [1.0,5.0], while in __C#__ is ``System.Collections.ArrayList``.
+In the documentation, parameters for methods are often ``const AL::ALValue&``, but python and C# does not have this type of variable. In __Python__ ALValues are often just simple list [1.0,5.0], while in __C#__ is ``System.Collections.ArrayList``.
 
 Another common parameter or return value in documentation is ``std::vector<string>``, this in __Python__ again is a simple list, while in __C#__ is ``System.Generics.List<System.String>``. To learn more about the [mapping between C++ types and other programming languages](https://community.aldebaran-robotics.com/doc/1-14/naoqi/stdtypes.html)
 
 #####More Information
-Here is also a good place to understand that while NAOqi API is available on __8__ languages(C#, Mathlab, Java ....), only 2 langauges(__C++ and Python__) can be run natively on the robot (means starting the program on the robot)
+Here is also a good place to understand that while NAOqi API is available on __8__ languages(C#, Mathlab, Java ....), only 2 langauges(__C++ and Python__) can be run natively on the robot (means starting the program on t he robot). Other language are called __remotely__ over the network. These codes __DO NOT__ run on Nao.
 
 However, all API follows the similar structure and the same method call can be found on all platform. For example, the following is the one to one mapping of the same method from python to C#, notice the similarities
 
@@ -47,9 +47,10 @@ C#:
 	MotionProxy motion = new MotionProxy("192.168.1.1", 9559);
 	motion.move(0.5,0.5,0.5)
 
+If the function exist in Python, it also exist in C# or Java.
 
 
-####4. The Mysterious .post 
+####4. The Mysterious ``.post``
 This is a python demo for running two different action at the same time. 
 
 Example: [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/making_nao_move.html)
@@ -62,7 +63,7 @@ I put this issue quite high on the list because it is an issue that nearly every
 #####What is the problem?
 If you read the documentation on [SetAngles](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::setAngles__AL::ALValueCR.AL::ALValueCR.floatCR) and [AngleInterpolationWithSpeed](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::angleInterpolationWithSpeed__AL::ALValueCR.AL::ALValueCR.floatCR), you will notice they are trying accomplish the same thing. The difference is that ``Motion.SetAngles`` is a __Non-Blocking__ call and ``Motion.AngleInterpolation`` is a __Blocking__ call.
 ####What is the meaning of Blocking and Non-Blocking?
-The documentation here is actually misleading. Instead of Blocking and Non-Blocking, what the documentation wanted to say is ``Motion.AngleInterpolationWithSpeed`` will lock the resource, while ``Motion.SetAngles`` will NOT.
+The documentation is actually misleading. Instead of Blocking and Non-Blocking, what the documentation wanted to say is ``Motion.AngleInterpolationWithSpeed`` will lock the resource, while ``Motion.SetAngles`` will NOT.
 For example, if the following code is run:
 
 		Motion.post.AngleInterpolationWithSpeed('HeadYaw',2,1,true)
@@ -81,10 +82,12 @@ Nao is a machine and at every cycle Nao will update a list in the system. The sy
 A Good example is the example using Python: 
 [Python Example](https://community.aldebaran-robotics.com/doc/1-14/dev/python/processing_data.html)
 
+####7. What now?
+Read the documentation. If you want to do something, see whether there is an API call for it.
 
-####7. Beyond here
+#### Beyond here
 The most important document: [<h1>User Manual for NAO</h1>](https://community.aldebaran-robotics.com/doc/1-14/naoqi/index.html#naoqi-api)
-Here is a list of other 'stuff':
+Here is a list of other 'stuff' to know:
 
 * [List of Joints and the limitation of each joint](https://community.aldebaran-robotics.com/doc/1-14/family/nao_h25/joints_h25.html#h25-joints)
 *  [Running Code on Nao (Python only)](https://community.aldebaran-robotics.com/doc/1-14/dev/python/running_python_code_on_the_robot.html)
