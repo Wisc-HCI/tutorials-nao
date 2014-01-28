@@ -59,7 +59,7 @@ The important idea here is using ``.post`` for parallel task. What the System do
 
 
 ####5. Understanding difference between ``SetAngles`` and ``AngleInterpolationWithSpeed``
-I put this issue quite high on the list because it is an issue that nearly every NAO programer in the Lab(A bit generalization) has faced.
+this is an important idea because it is an issue that nearly every NAO programer in the Lab(A bit generalization) have faced.
 #####What is the problem?
 If you read the documentation on [SetAngles](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::setAngles__AL::ALValueCR.AL::ALValueCR.floatCR) and [AngleInterpolationWithSpeed](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::angleInterpolationWithSpeed__AL::ALValueCR.AL::ALValueCR.floatCR), you will notice they are trying accomplish the same thing. The difference is that ``Motion.SetAngles`` is a __Non-Blocking__ call and ``Motion.AngleInterpolation`` is a __Blocking__ call.
 ####What is the meaning of Blocking and Non-Blocking?
