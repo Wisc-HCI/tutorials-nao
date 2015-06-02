@@ -7,30 +7,30 @@ This is a list of steps to learn how to program a NAO robot. Instead of writing 
 
 ###Guide
 ####1. Setting up NAO
-* Using [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/install_guide.html#python-install-guide)
-* Using [C#](https://community.aldebaran-robotics.com/doc/1-14/dev/dotnet/index.html)
+* Using [Python](http://doc.aldebaran.com/1-14/dev/python/install_guide.html#python-install-guide)
+* Using [C#](http://doc.aldebaran.com/1-14/dev/dotnet/index.html)
 
 A downloadable version of the SDKs can be found at: [Resources](https://community.aldebaran-robotics.com/resources/) (Please get the username and password from the forum)
 
 ####2. NAO's Hello World
 A basic program that uses the voice synthesizer on Nao to speak "Hello World"
 
-* using [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/making_nao_speak.html)
-* using [C#](https://community.aldebaran-robotics.com/doc/1-14/dev/dotnet/index.html#hello-world-example)
+* using [Python](http://doc.aldebaran.com/1-14/dev/python/making_nao_speak.html)
+* using [C#](http://doc.aldebaran.com/1-14/dev/dotnet/index.html#hello-world-example)
 
 
 ####3. Moving NAO
 This is an example of controlling NAO to move forward using the ``Motion`` Module.
 
-Example: [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/making_nao_move.html)
+Example: [Python](http://doc.aldebaran.com/1-14/dev/python/making_nao_move.html)
 
 #####Remember to Set Stiffness
-remember to set the stiffness ``motion.setStiffnesses("Body", 1.0)`` before moving. In simple terms, stiffness is whether there is electric current flowing through the motors in NAO's body. To learn more about [Stiffness](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-stiffness.html#control-stiffness)
+remember to set the stiffness ``motion.setStiffnesses("Body", 1.0)`` before moving. In simple terms, stiffness is whether there is electric current flowing through the motors in NAO's body. To learn more about [Stiffness](http://doc.aldebaran.com/1-14/naoqi/motion/control-stiffness.html#control-stiffness)
 
 #####Declaring Variables
 In the documentation, parameters for methods are often ``const AL::ALValue&``, but python and C# does not have this type of variable. In __Python__ ALValues are often just simple list [1.0,5.0], while in __C#__ is ``System.Collections.ArrayList``.
 
-Another common parameter or return value in documentation is ``std::vector<string>``, this in __Python__ again is a simple list, while in __C#__ is ``System.Generics.List<System.String>``. To learn more about the [mapping between C++ types and other programming languages](https://community.aldebaran-robotics.com/doc/1-14/naoqi/stdtypes.html)
+Another common parameter or return value in documentation is ``std::vector<string>``, this in __Python__ again is a simple list, while in __C#__ is ``System.Generics.List<System.String>``. To learn more about the [mapping between C++ types and other programming languages](http://doc.aldebaran.com/1-14/naoqi/stdtypes.html)
 
 #####More Information
 Here is also a good place to understand that while NAOqi API is available on __8__ languages(C#, Mathlab, Java ....), only 2 langauges(__C++ and Python__) can be run natively on the robot (means starting the program on t he robot). Other language are called __remotely__ over the network. These codes __DO NOT__ run on Nao.
@@ -53,15 +53,15 @@ If the function exist in Python, it also exist in C# or Java.
 ####4. The Mysterious ``.post``
 This is a python demo for running two different action at the same time. 
 
-Example: [Python](https://community.aldebaran-robotics.com/doc/1-14/dev/python/making_nao_move.html)
+Example: [Python](http://doc.aldebaran.com/1-14/dev/python/making_nao_move.html)
 
-The important idea here is using ``.post`` for parallel task. What the System do when they see ``.post`` is creating another thread that runs the action. Remember you can wait for the action using the ``.wait()`` commmand. You can learn more about parallel task [here](https://community.aldebaran-robotics.com/doc/1-14/dev/naoqi/index.html#blocking-and-non-blocking-calls). 
+The important idea here is using ``.post`` for parallel task. What the System do when they see ``.post`` is creating another thread that runs the action. Remember you can wait for the action using the ``.wait()`` commmand. You can learn more about parallel task [here](http://doc.aldebaran.com/1-14/dev/naoqi/index.html#blocking-and-non-blocking-calls). 
 
 
 ####5. Understanding difference between ``SetAngles`` and ``AngleInterpolationWithSpeed``
 this is an important idea because it is an issue that nearly every NAO programer in the Lab(A bit generalization) have faced.
 #####What is the problem?
-If you read the documentation on [SetAngles](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::setAngles__AL::ALValueCR.AL::ALValueCR.floatCR) and [AngleInterpolationWithSpeed](https://community.aldebaran-robotics.com/doc/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::angleInterpolationWithSpeed__AL::ALValueCR.AL::ALValueCR.floatCR), you will notice they are trying accomplish the same thing. The difference is that ``Motion.SetAngles`` is a __Non-Blocking__ call and ``Motion.AngleInterpolation`` is a __Blocking__ call.
+If you read the documentation on [SetAngles](http://doc.aldebaran.com/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::setAngles__AL::ALValueCR.AL::ALValueCR.floatCR) and [AngleInterpolationWithSpeed](http://doc.aldebaran.com/1-14/naoqi/motion/control-joint-api.html#ALMotionProxy::angleInterpolationWithSpeed__AL::ALValueCR.AL::ALValueCR.floatCR), you will notice they are trying accomplish the same thing. The difference is that ``Motion.SetAngles`` is a __Non-Blocking__ call and ``Motion.AngleInterpolation`` is a __Blocking__ call.
 ####What is the meaning of Blocking and Non-Blocking?
 The documentation is actually misleading. Instead of Blocking and Non-Blocking, what the documentation wanted to say is ``Motion.AngleInterpolationWithSpeed`` will lock the resource, while ``Motion.SetAngles`` will NOT.
 For example, if the following code is run:
@@ -80,17 +80,17 @@ Instead of moving to position 2 first, the ALMotion will be updated and move to 
 Nao is a machine and at every cycle Nao will update a list in the system. The system have around 1000++ different variables. A full list of keys can be found [here](#). These variables can be acccess with a function called ``ALMemory.getData(KEY)``. This function is important as it allows you to simulate events using polling.
 
 A Good example is the example using Python: 
-[Python Example](https://community.aldebaran-robotics.com/doc/1-14/dev/python/processing_data.html)
+[Python Example](http://doc.aldebaran.com/1-14/dev/python/processing_data.html)
 
 ####7. What now?
 Read the documentation. If you want to do something, see whether there is an API call for it.
 
 #### Beyond here
-The most important document: <h2>[User Manual for NAO](https://community.aldebaran-robotics.com/doc/1-14/naoqi/index.html#naoqi-api)</h2>
+The most important document: <h2>[User Manual for NAO](http://doc.aldebaran.com/1-14/naoqi/index.html#naoqi-api)</h2>
 
 Here is a list of other 'stuff' to know:
 
-* [List of Joints and the limitation of each joint](https://community.aldebaran-robotics.com/doc/1-14/family/nao_h25/joints_h25.html#h25-joints)
-*  [Running Code on Nao (Python only)](https://community.aldebaran-robotics.com/doc/1-14/dev/python/running_python_code_on_the_robot.html)
-*  [Reacting to Events (Python only)](https://community.aldebaran-robotics.com/doc/1-14/dev/python/reacting_to_events.html#python-reacting-to-events)
+* [List of Joints and the limitation of each joint](http://doc.aldebaran.com/1-14/family/nao_h25/joints_h25.html#h25-joints)
+*  [Running Code on Nao (Python only)](http://doc.aldebaran.com/1-14/dev/python/running_python_code_on_the_robot.html)
+*  [Reacting to Events (Python only)](http://doc.aldebaran.com/1-14/dev/python/reacting_to_events.html#python-reacting-to-events)
 *  Identify the Error with ``Motion.angleInterpolationBezier``
